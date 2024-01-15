@@ -10,3 +10,6 @@ pip freeze >requirements.txt
 
 ##取消 github http代理
 git config --global --unset http.https://github.com.proxy
+
+
+conda create -n henan_oms_report_sql python==3.9.11 -y
