@@ -15,8 +15,8 @@ FROM (select
   wfid , sum("WTUR.TotEgyAt.Wt.F32[max]"-"WTUR.TotEgyAt.Wt.F32[min]") QOFC
 FROM public.statisticdata_view_0
 WHERE wfid IN (411328,411311,411335)
-        AND rectime > to_timestamp(concat(to_char(current_date-2,'yyyy-mm-dd') ,' 23:50:00'),'yyyy-MM-dd hh24:mi:ss')
-        AND rectime <= to_timestamp(concat(to_char(current_date-1,'yyyy-mm-dd') ,' 23:50:00'),'yyyy-MM-dd hh24:mi:ss')
+        AND rectime >= to_timestamp(concat(to_char(current_date-2,'yyyy-mm-dd') ,' 23:50:00'),'yyyy-MM-dd hh24:mi:ss')
+        AND rectime < to_timestamp(concat(to_char(current_date-1,'yyyy-mm-dd') ,' 23:50:00'),'yyyy-MM-dd hh24:mi:ss')
 GROUP BY 
  wfid     ) aa
 
@@ -24,8 +24,8 @@ LEFT JOIN (select
  wfid , SUM("MH.TotEgyAt.Wt.F32.OZ[max]"-"MH.TotEgyAt.Wt.F32.OZ[min]") OGC
 FROM public.statisticdata_view_11
 WHERE wtid IN (411328801,411311850,411335801)
-        AND rectime > to_timestamp(concat(to_char(current_date-2,'yyyy-mm-dd') ,' 23:50:00'),'yyyy-MM-dd hh24:mi:ss')
-        AND rectime <= to_timestamp(concat(to_char(current_date-1,'yyyy-mm-dd') ,' 23:50:00'),'yyyy-MM-dd hh24:mi:ss')
+        AND rectime >= to_timestamp(concat(to_char(current_date-2,'yyyy-mm-dd') ,' 23:50:00'),'yyyy-MM-dd hh24:mi:ss')
+        AND rectime < to_timestamp(concat(to_char(current_date-1,'yyyy-mm-dd') ,' 23:50:00'),'yyyy-MM-dd hh24:mi:ss')
 GROUP BY 
  wfid  ) cc
     ON aa.wfid=cc.wfid
@@ -61,8 +61,8 @@ from
         public.statisticdata_view_0
     where
         wfid in (410922, 410901, 410526, 410923,410728,410546,411101,410402)
-        and rectime > to_timestamp(concat(to_char(current_date-2, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss')
-        and rectime <= to_timestamp(concat(to_char(current_date-1, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss')
+        and rectime >= to_timestamp(concat(to_char(current_date-2, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss')
+        and rectime < to_timestamp(concat(to_char(current_date-1, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss')
     group by
         case
             when wfid = 370182 then 370181
@@ -79,8 +79,8 @@ left join (
                 public.statisticdata_view_11
             where
                 wtid in (410901813)
-                and rectime > to_timestamp(concat(to_char(current_date-2, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss')
-                and rectime <= to_timestamp(concat(to_char(current_date-1, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss') )
+                and rectime >= to_timestamp(concat(to_char(current_date-2, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss')
+                and rectime < to_timestamp(concat(to_char(current_date-1, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss') )
             else ogc
         end ogc
     from
@@ -94,8 +94,8 @@ left join (
             public.statisticdata_view_11
         where
             wtid in (410901812, 410922801, 410526801, 410901813,410728850,410546850,411101821,410402801)
-            and rectime > to_timestamp(concat(to_char(current_date-2, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss')
-            and rectime <= to_timestamp(concat(to_char(current_date-1, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss')
+            and rectime >= to_timestamp(concat(to_char(current_date-2, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss')
+            and rectime < to_timestamp(concat(to_char(current_date-1, 'yyyy-mm-dd') , ' 23:50:00'), 'yyyy-MM-dd hh24:mi:ss')
         group by
             case
                 when wtid = 410901813 then 410923

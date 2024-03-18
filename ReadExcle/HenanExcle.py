@@ -24,7 +24,7 @@ def runtask():
     from HenanSqlConfig import henansql
     cursor.execute(henansql, (hh4, hh3))
     daily_data = cursor.fetchall()
-    print(len(daily_data), "数据大小")
+    print(len(daily_data),"长度")
     cols = cursor.description
     cursor.close()
     conn.close()
@@ -50,9 +50,8 @@ def runtask():
         from DataBaseInfo.qdl import qdl_df
         newdf = qdl_df()
         try:
-            new_data_qdl = pd.DataFrame(
-                [['飞翔三期储能', newdf[newdf['电场名称'] == '飞翔风电场']['弃电量'].values[0]]],
-                columns=['电场名称', '弃电量'])
+            new_data_qdl = pd.DataFrame([['飞翔三期储能', newdf[newdf['电场名称'] == '飞翔风电场']['弃电量'].values[0]]],
+                                        columns=['电场名称', '弃电量'])
             newdf = pd.concat([newdf, new_data_qdl], ignore_index=True)
 
         except:
@@ -64,7 +63,8 @@ def runtask():
     except Exception as e:
         merged_df = df
 
-    merged_df.to_excel('河南oms8.xlsx')
+    merged_df.to_excel('河南oms81.xlsx')
+
 
     try:
         from DataBaseInfo.MysqlInfo.MysqlTools import MysqlCurd
@@ -103,7 +103,7 @@ def runtask():
                     print(F"插入成功--{insert_sql}")
                 else:
                     MC.update(update_sql)
-                    print("更新成功" - ---{update_sql})
+                    print("更新成功"----{update_sql})
             except Exception as e:
                 print(F'{e}--老库失败！')
         # merged_df.to_sql('data_oms', engine, if_exists='append', index=False)
@@ -124,3 +124,17 @@ if __name__ == '__main__':
 
     # print(F'数据推送程序运行中,请勿关闭')
     runtask()
+    print(F'数据推送程序运行中,请勿关闭')
+    schedule.every().day.at("00:01").do(runtask)
+    schedule.every().day.at("00:02").do(runtask)
+    print(F'有定时器！')
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+# from DataBaseInfo.MysqlInfo.MysqlTools import MysqlCurd
+#
+# new_nanfang = F'../DataBaseInfo/MysqlInfo/new_nanfang.yml'
+# NEWMC = MysqlCurd(new_nanfang)
+# insert_sql = F"INSERT INTO data_oms (省份,电场名称,日期,发电量,上网电量,弃电量) VALUES ('{123}','{466}','{456}','{456}','{45}','{465}')"
+# NEWMC.update(insert_sql)
